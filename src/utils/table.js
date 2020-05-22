@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Button, DatePicker, Icon, Input, Table, Select, Spin } from 'antd'
+import { Button, DatePicker, Input, Table, Select, Spin } from 'antd'
+import { SearchOutlined, FilterOutlined } from '@ant-design/icons'
 
 import isEqual from 'lodash/isEqual'
 import clone from 'lodash/clone'
@@ -125,8 +126,8 @@ class TableMain extends Component {
         </Button>
       </div>)
     },
-    filterIcon: filtered => <Icon id={`searchIcon-${dataIndex}`}
-                                  type="search" style={{color: filtered ? '#1890ff' : undefined}}/>,
+    filterIcon: filtered => <SearchOutlined id={`searchIcon-${dataIndex}`}
+                                            style={{color: filtered ? '#1890ff' : undefined}}/>,
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => this.searchInput.select())
@@ -212,8 +213,8 @@ class TableMain extends Component {
     filterIcon: x => {
       let {dateFilters} = this.state
       let filtered = dateFilters && dateFilters[dataIndex]
-      return <Icon type="search" id={`searchIcon-${dataIndex}`}
-                   style={{color: filtered ? '#1890ff' : undefined}}/>
+      return <SearchOutlined type="search" id={`searchIcon-${dataIndex}`}
+                             style={{color: filtered ? '#1890ff' : undefined}}/>
     },
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
@@ -280,8 +281,8 @@ class TableMain extends Component {
         if (i.filters) {
           console.log(i)
           let x = {
-            filterIcon: filtered => <Icon id={`searchIcon-${i.dataIndex}`} type={'filter'}
-                                          style={{color: filtered ? '#1890ff' : undefined}}/>,
+            filterIcon: filtered => <FilterOutlined id={`searchIcon-${i.dataIndex}`} type={'filter'}
+                                                    style={{color: filtered ? '#1890ff' : undefined}}/>,
           }
 
           i = {...x, ...i}

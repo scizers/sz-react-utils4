@@ -36,5 +36,5 @@ export default {
     resolve(),
     commonjs(),
   ],
-  external: ['antd', 'react', 'string'], // <-- suppresses the warning
+  external: ['antd', '@ant-design/icons', 'react', 'string'], // <-- suppresses the warning
 }

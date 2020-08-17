@@ -61,6 +61,12 @@ class TableMain extends Component {
 
     params.count = params.results
 
+    for (let x in params) {
+      if (params[x] === null) {
+        delete params[x]
+      }
+    }
+
     let data = await this.props.apiRequest({...params})
 
     let pagination = {...this.state.pagination}

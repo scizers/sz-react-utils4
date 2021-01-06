@@ -12,6 +12,7 @@ import filter from 'lodash/filter'
 import memoizeOne from 'memoize-one'
 import S from 'string'
 
+
 const {Option} = Select
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker
@@ -88,6 +89,7 @@ class TableMain extends Component {
         clearFilters,
       } = pro
 
+     
       return (<div
         id={`filter-${dataIndex}`}
         className={`filter-${dataIndex}`}
@@ -114,7 +116,8 @@ class TableMain extends Component {
           className={'search'}
           type="primary"
           onClick={() => this.handleSearch(selectedKeys, confirm)}
-          icon="search"
+          icon={<SearchOutlined/>}
+          
           size="small"
           style={{width: 90, marginRight: 8}}
         >
@@ -171,12 +174,17 @@ class TableMain extends Component {
           style={{width: 250, marginBottom: 8, display: 'block'}}
           ref={node => {
             this.searchInput = node
-          }}
-          onChange={(date) => {
-            setSelectedKeys({
-              $gte: date[0].startOf('day').toDate(),
-              $lt: date[1].endOf('day').toDate(),
-            })
+          }}         
+         
+          onChange={(date) => {           
+            setSelectedKeys(date)
+          
+            //  setSelectedKeys({
+            //    $gte: date[0].startOf('day').toDate(),
+            //    $lt: date[1].endOf('day').toDate(),
+            //  })
+
+           
           }}/>
 
         <div style={{flex: 1, justifyContent: 'flex-end'}}>
@@ -184,14 +192,35 @@ class TableMain extends Component {
             type="primary"
             className={'search'}
             onClick={() => {
-              let dateFilters = clone(this.state.dateFilters)
-              dateFilters[dataIndex] = true
-              this.setState({
-                dateFilters,
-              })
-              confirm()
+          
+                let dateFilters = clone(this.state.dateFilters);
+                dateFilters[dataIndex] = true
+                this.setState({
+                  dateFilters
+                },()=>{
+                   
+                    confirm()
+                })
+                
+            //  let choosenDate = clone(pro.selectedKeys)
+             
+            // let  dateFilters={
+            //      $gte:choosenDate[0].startOf('day').toDate(),
+            //      $lte:choosenDate[1].startOf('end').toDate(),
+            //  }
+            //  // let dateFilters = clone(this.state.dateFilters)
+            //   dateFilters[dataIndex] = true
+             
+            //   console.log(choosenDate)
+            //   console.log("====")
+            //   console.log(dateFilters)
+            //   this.setState({
+            //     dateFilters,
+            //   })
+             
+            //   confirm()
             }}
-            icon="search"
+            icon={<SearchOutlined/>}
             size="small"
             style={{width: 90, marginRight: 8}}
           >
@@ -285,7 +314,6 @@ class TableMain extends Component {
         }
 
         if (i.filters) {
-          console.log(i)
           let x = {
             filterIcon: filtered => <FilterOutlined id={`searchIcon-${i.dataIndex}`} type={'filter'}
                                                     style={{color: filtered ? '#1890ff' : undefined}}/>,

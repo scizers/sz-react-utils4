@@ -37,7 +37,6 @@ class TableMain extends Component {
     this.setState({
       pagination: pager,
     })
-    console.log("filters",filters)
     this.fetch2({
       results: pagination.pageSize,
       page: pagination.current,

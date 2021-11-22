@@ -386,6 +386,8 @@ const GetAllFormFields = (props) => {
             >
               <SimpleFormElement item={item} {...inputProps}/>
 
+              {item.rightComp ? item.rightComp : null}
+
             </Form.Item>}
 
           </React.Fragment>

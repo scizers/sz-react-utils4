@@ -226,9 +226,9 @@ const SimpleFormElement = (props) => {
   const {type} = item
 
   return (
-    <>
+    <React.Fragment>
       {section(type)}
-    </>
+    </React.Fragment>
   )
 
 }
@@ -238,8 +238,7 @@ const GetAllFormFields = (props) => {
   const {inputSchema, children, apiurl} = props
 
   return (
-    <>
-
+    <React.Fragment>
       {inputSchema.fields.map((item) => {
 
         let rules = []
@@ -397,7 +396,7 @@ const GetAllFormFields = (props) => {
 
       {children}
 
-    </>
+    </React.Fragment>
   )
 }
 

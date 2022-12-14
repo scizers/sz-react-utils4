@@ -107,24 +107,27 @@ class TableMain extends Component {
           value={selectedKeys[0]}
           onChange={e => setSelectedKeys(
             e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+          onPressEnter={(e) => {
+            return this.handleSearch(selectedKeys, confirm)
+          }}
           style={{width: 188, marginBottom: 8, display: 'block'}}
         />
+
         <Button
           className={'search'}
           type="primary"
           onClick={() => this.handleSearch(selectedKeys, confirm)}
           icon={<SearchOutlined/>}
-
           size="small"
           style={{width: 90, marginRight: 8}}
         >
           Search
         </Button>
+
         <Button
           className={'reset'}
           onClick={() => {
-            this.handleReset(clearFilters)
+            this.handleReset(clearFilters, confirm)
           }}
           size="small"
           style={{width: 90}}
@@ -256,13 +259,24 @@ class TableMain extends Component {
   })
 
   handleSearch = (selectedKeys, confirm) => {
-    confirm()
-    this.setState({searchText: selectedKeys[0]})
+
+    this.setState({searchText: selectedKeys[0]}, () => {
+      setTimeout(() => {
+        confirm()
+      }, 100)
+    })
+
   }
 
-  handleReset = (clearFilters) => {
-    clearFilters()
+  handleReset = (clearFilters, confirm) => {
     this.setState({searchText: ''})
+    setTimeout(() => {
+      clearFilters()
+    }, 100)
+
+    setTimeout(() => {
+      confirm()
+    }, 200)
   }
 
   reload = (withoutLoader) => {
